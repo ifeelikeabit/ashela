@@ -4,9 +4,12 @@
 - [x] Prompt display (e.g., `mysh>`)
 - [x] Tokenizer via `strtok()`
 - [x] Reading user input (line-based)
-- [x] Built-in commands (e.g., `cd`, `exit`, `pwd`, `echo`, `export`)
+- [x] Basic system fetch-info(`fetchbox()`)
 
-### 🛠️ In Progress / Planned Features
+### 🛠️ In Progress
+- [] Built-in commands (e.g., `pwd` , `cd` , `` )
+
+### Planned Features
 - [ ] Signal handling (e.g., `Ctrl+C`, `Ctrl+Z`)
 - [ ] Lexical analysis (tokenization) – **Lexer**
 - [ ] Syntax analysis (parsing) – using **Bison/Flex** or manual parser
