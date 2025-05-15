@@ -1,1 +1,0 @@
-/usr/bin/cc -Wl,--dependency-file=CMakeFiles/ashela.dir/link.d CMakeFiles/ashela.dir/src/main.c.o -o ashela

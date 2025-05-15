@@ -1,3 +1,0 @@
-/home/esat/Desktop/C/ashela/build/CMakeFiles/ashela.dir
-/home/esat/Desktop/C/ashela/build/CMakeFiles/edit_cache.dir
-/home/esat/Desktop/C/ashela/build/CMakeFiles/rebuild_cache.dir
