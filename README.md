@@ -7,7 +7,7 @@
 - [x] Basic system fetch-info(`fetchbox()`)
 
 ### 🛠️ In Progress
-- [] Built-in commands (e.g., `pwd` , `cd` , `` )
+- [ ] Built-in commands (e.g., `pwd` , `cd` , `` )
 
 ### Planned Features
 - [ ] Signal handling (e.g., `Ctrl+C`, `Ctrl+Z`)
