@@ -43,11 +43,12 @@ void ashela_loop(){
 		if(strcmp(args[0],"exit")==0) { return; }
 		if(strcmp(args[0],"clear")==0) 
 		{system("clear"); continue;}
+		//builtin fuser
 		if(is_builtin(args[0])){
 			run_builtin(args[0],args);
 			continue;
 		}
-		else { printf("%sCommand not found: %s\n",PROMPT,args[0]);}
+		else { printf("Command not found: %s\n",args[0]);}
 	} 
 }
 char **parse_input(char *input){
@@ -77,7 +78,7 @@ for(int i=0;args[i];i++){
 free(args);
 }
 
-typedef struct {
+typedef struct { //we create a struct definition called by builtin_t
 char *name;
 int (*func)(char **args);
 }builtin_t;
@@ -85,7 +86,7 @@ int (*func)(char **args);
 
 builtin_t builtins[]={
 	{"pwd",pwd},
-//	{"cd",cd},
+	{"cd",cd},
 //	{"ls",ls},
 //	{"rm",rm},
 //	{"mv",mv},
@@ -95,7 +96,7 @@ int builtin_count() {
     return sizeof(builtins) / sizeof(builtin_t);
 }
 
-int is_builtin(char *cmd){
+int is_builtin(char *cmd){//returns  1 when true 
 	for(int i = 0; i < builtin_count();i++)
 	{
 		if(strcmp(cmd,builtins[i].name)==0){ 
@@ -104,7 +105,7 @@ int is_builtin(char *cmd){
 	return 0;
 }
 int run_builtin(char *cmd , char **args){
-	for(int i = 0; i < builtin_count();i++)
+	for(int i = 0; i < builtin_count();i++)//this step probably not neccessary you can run directly
 	{
 		if(strcmp(cmd,builtins[i].name)==0){ 
 		return builtins[i].func(args);
@@ -145,6 +146,34 @@ int pwd(char **args){
 	fprintf(stderr,"pwd: invalid option %s\n",args[1]);
 	return 1;
 }
+/* ls list files .
+ * no args ignore .files
+ * -l print with author . Long list format
+ *  -a print all, dont ignore  .files 
+ *  */
+int ls(char **args){ 
+	char cwd[1024];
+	if(getcwd(cwd,sizeof(cwd))==NULL){perror("Problem accuared by getting working directory");return 1;}
+	fopen(cwd,"r"); //check dump/main.c for stat.h testing process.
+
+	return 0;}
+int cd(char **args){
+	const char *path = args[1];
+	printf("%s","called cd function\n");
+	chdir(path);
+
+
+	return 1;}
+
+
+
+
+
+
+
+
+
+//I will separate fetchbox into another file in the future
 
 #include <sys/utsname.h>
 #include <unistd.h>
