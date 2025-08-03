@@ -87,8 +87,10 @@ int (*func)(char **args);
 builtin_t builtins[]={
 	{"pwd",pwd},
 	{"cd",cd},
-//	{"ls",ls},
+	{"ls",ls},
 //	{"rm",rm},
+//	{"mkdir","mkdir"}
+//	{"touch","touch"}
 //	{"mv",mv},
 	{"fetchbox",fetchbox}
 };
@@ -144,26 +146,48 @@ int pwd(char **args){
 		else { perror("pwd");}
 	}
 	fprintf(stderr,"pwd: invalid option %s\n",args[1]);
-	return 1;
+	return 0;
 }
 /* ls list files .
  * no args ignore .files
  * -l print with author . Long list format
  *  -a print all, dont ignore  .files 
  *  */
+#include<dirent.h>
 int ls(char **args){ 
 	char cwd[1024];
 	if(getcwd(cwd,sizeof(cwd))==NULL){perror("Problem accuared by getting working directory");return 1;}
-	fopen(cwd,"r"); //check dump/main.c for stat.h testing process.
-
+	DIR *dir = opendir(cwd);
+	struct dirent *entry;
+	//ls no args
+	if(args[1]==NULL)
+	{
+		while( (entry = readdir(dir))!=NULL)
+		{
+			if( entry->d_name[0]=='.'){continue;} 
+			printf("%s  ",entry->d_name);
+		 }
+	}
+	
+	//ls -a 
+	else if(strcmp(args[1],"-a")==0){
+		while( (entry = readdir(dir))!=NULL){
+		
+			printf("%s  ",entry->d_name);
+		}}
+	printf("\n");
 	return 0;}
-int cd(char **args){
-	const char *path = args[1];
-	printf("%s","called cd function\n");
-	chdir(path);
 
+	int cd(char **args){
+		if(args[1]==NULL){return 0;}
+		const char *path = args[1];
+		if(chdir(path)!=0)
+		{
+			perror("An error occured. cd: \n");
+			return 1;
+		}
 
-	return 1;}
+		return 0;}
 
 
 
