@@ -7,9 +7,9 @@
 #define SHELL_NAME "shell"
 #define PROMPT SHELL_NAME "# "
 void ashela_loop();
-char **parse_input(char *input); 
+char **parse_input(char *input, int *argv); 
 void free_args(char **args);
-
+int argv=0;
 int main(){
 	ashela_loop();
 	return 0;
@@ -21,6 +21,7 @@ int rm(char **args);
 int mv(char **args);
 int mkdir(char **args);
 int fetchbox(char **args); 
+int touch(char **args);
 
 int is_builtin(char *cmd);
 int run_builtin(char *cmd,char **args);
@@ -29,6 +30,7 @@ int builtin_count();
 void ashela_loop(){
 	char input[MAX_INPUT];
 	char **args;
+	int arvgv=0;
 
 	while (1) {
 		printf("%s",PROMPT);
@@ -38,7 +40,7 @@ void ashela_loop(){
 		}
 		input[strcspn(input,"\n")]=0;
 		if(strlen(input)==0)continue;
-		args=parse_input(input);
+		args=parse_input(input,&argv);
 		if(!args || !args[0]){ continue;}
 		if(strcmp(args[0],"exit")==0) { return; }
 		if(strcmp(args[0],"clear")==0) 
@@ -51,7 +53,7 @@ void ashela_loop(){
 		else { printf("Command not found: %s\n",args[0]);}
 	} 
 }
-char **parse_input(char *input){
+char **parse_input(char *input, int *argv){
 
 	char **args = malloc(MAX_ARGS *  sizeof(char*));
 	char *token;
@@ -64,6 +66,7 @@ char **parse_input(char *input){
 		token = strtok(NULL," ");
 	}
 	args[i]=NULL;
+	*argv = i;
 	return args;
 
 } 
@@ -88,10 +91,11 @@ builtin_t builtins[]={
 	{"pwd",pwd},
 	{"cd",cd},
 	{"ls",ls},
+	{"touch",touch},
 //	{"rm",rm},
-//	{"mkdir","mkdir"}
-//	{"touch","touch"}
+//	{"mkdir",mkdir}
 //	{"mv",mv},
+//	{"cp",cp}
 	{"fetchbox",fetchbox}
 };
 int builtin_count() {
@@ -188,7 +192,36 @@ int ls(char **args){
 		}
 
 		return 0;}
+//is_file_exist function is checking file name is exist.
+int is_file_exist(char *filename) 
+{
+	FILE *fptr;
+	if((fptr = fopen (filename,"r")))
+	{
+		return 0;//File is exist
 
+	}
+	return 1;//File not exist
+}
+int touch(char **args)
+{
+
+
+	if(argv==1){return 0;}
+	FILE *fptr;
+	for(int i=1;i<argv;i++)
+	{
+		if(!is_file_exist(args[i])){printf("%s%s\n",args[i]," is already exist");continue;}
+		fptr = fopen(args[i],"w");
+	}
+
+
+
+
+
+
+
+return 0;}
 
 
 
