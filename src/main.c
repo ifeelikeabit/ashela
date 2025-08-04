@@ -232,7 +232,7 @@ int do_mkdir(char **args)
 		   if(mkdir(args[i],0755)==-1){perror("an error occured while creating folder");}
 		
 	}
-	return 0;}
+return 0;}
 
 
 
