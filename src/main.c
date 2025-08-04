@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
 #include <unistd.h>
+#include <sys/stat.h>
+#include <stdbool.h>
 #define MAX_INPUT 1024
 #define MAX_ARGS 16
 #define SHELL_NAME "shell"
@@ -19,10 +22,9 @@ int cd(char **args);
 int ls(char **args);
 int rm(char **args);
 int mv(char **args);
-int mkdir(char **args);
 int fetchbox(char **args); 
 int touch(char **args);
-
+int do_mkdir(char **args);
 int is_builtin(char *cmd);
 int run_builtin(char *cmd,char **args);
 int builtin_count();
@@ -93,7 +95,7 @@ builtin_t builtins[]={
 	{"ls",ls},
 	{"touch",touch},
 //	{"rm",rm},
-//	{"mkdir",mkdir}
+	{"mkdir",do_mkdir},
 //	{"mv",mv},
 //	{"cp",cp}
 	{"fetchbox",fetchbox}
@@ -197,7 +199,7 @@ int is_file_exist(char *filename)
 {
 	FILE *fptr;
 	if((fptr = fopen (filename,"r")))
-	{
+	{fclose(fptr);
 		return 0;//File is exist
 
 	}
@@ -214,14 +216,27 @@ int touch(char **args)
 		if(!is_file_exist(args[i])){printf("%s%s\n",args[i]," is already exist");continue;}
 		fptr = fopen(args[i],"w");
 	}
+	return 0;}
+
+
+	bool is_folder_exist(const char *name) {
+		struct stat st;
+		return stat(name, &st) == 0;
+	}
+int do_mkdir(char **args)
+{
+	if(args[1]==NULL){printf("%s\n","mkdir: missing argumant");return 1;}
+	for(int i=1;i<argv;i++)
+	{
+	           if(is_folder_exist(args[i])){printf("%s%s\n",args[i]," is already exist");continue;}
+		   if(mkdir(args[i],0755)==-1){perror("an error occured while creating folder");}
+		
+	}
+	return 0;}
 
 
 
 
-
-
-
-return 0;}
 
 
 
@@ -324,5 +339,4 @@ int fetchbox(char** args)
 	fprintf(stderr,"fetchbox: this is not an option:%s\n",args[1]);
 	return 1;
 }
-
 
