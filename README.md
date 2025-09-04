@@ -1,3 +1,7 @@
+# Curren State
+
+![Demo](assets/demo.gif)
+
 # ✅ Unix Shell Feature List
 
 ### ✔️ Completed Features
@@ -5,26 +9,17 @@
 - [x] Tokenizer via `strtok()`
 - [x] Reading user input (line-based)
 - [x] Basic system fetch-info(`fetchbox()`)
-
+- [x] Built-in commands (e.g., `pwd` , `cd` , `touch` ,`ls`,`cd`)
 ### 🛠️ In Progress
-- [ ] Built-in commands (e.g., `pwd` , `cd` , `touch` ,`ls`,`cd`)
-
+- [ ] Organizing the project structure
+- [ ] Command history (possibly saved in a `.history` file)
 ### Planned Features
-- [ ] Signal handling (e.g., `Ctrl+C`, `Ctrl+Z`)
-- [ ] Lexical analysis (tokenization) – **Lexer**
-- [ ] Syntax analysis (parsing) – using **Bison/Flex** or manual parser
-- [ ] Command execution (`fork`, `execvp`, `wait`)
+- [ ] $PATH environment
 - [ ] Input/output redirection (`>`, `>>`, `<`)
 - [ ] Pipe support (`|`)
 - [ ] Background process support (`&`)
-- [ ] Job control (`jobs`, `fg`, `bg`)
-- [ ] Command history (possibly saved in a `.history` file)
 - [ ] Tab completion (optional, via `readline` or similar)
-- [ ] Configuration file support (e.g., `.myshrc`)
-- [ ] Environment variable management (`set`, `unset`, `export`)
-- [ ] Colored and customizable prompt
 - [ ] AST (Abstract Syntax Tree) creation and evaluation
-- [ ] Error handling and user-friendly error messages
-- [ ] Multiple command execution using `;` separator
 - [ ] Subshell support using parentheses `()`
+- [ ] Script support( existing languages or newly created ) 
 
