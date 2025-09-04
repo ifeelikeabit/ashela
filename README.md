@@ -1,6 +1,6 @@
 # Curren State
 
-![Demo](assets/demo.gif)
+![Demo](assets/output.gif)
 
 # ✅ Unix Shell Feature List
 
