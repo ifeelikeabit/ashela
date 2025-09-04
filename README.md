@@ -1,6 +1,6 @@
 # Current State
 
-![Demo](assets/output.gif)
+![Demo](assets/ashelagif.gif)
 
 # ✅ Unix Shell Feature List
 
