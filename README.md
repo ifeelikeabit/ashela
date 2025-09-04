@@ -10,6 +10,7 @@
 - [x] Reading user input (line-based)
 - [x] Basic system fetch-info(`fetchbox()`)
 - [x] Built-in commands (e.g., `pwd` , `cd` , `touch` ,`ls`,`cd`)
+- [x] System fetch (info) command `fetchbox`
 ### 🛠️ In Progress
 - [ ] Organizing the project structure
 - [ ] Command history (possibly saved in a `.history` file)
