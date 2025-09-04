@@ -1,4 +1,4 @@
-# Curren State
+# Current State
 
 ![Demo](assets/output.gif)
 
